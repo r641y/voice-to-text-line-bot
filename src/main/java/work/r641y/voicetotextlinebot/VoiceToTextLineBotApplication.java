@@ -12,26 +12,37 @@ import com.linecorp.bot.spring.boot.annotation.LineMessageHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 @LineMessageHandler
 public class VoiceToTextLineBotApplication {
+
+
     public static void main(String[] args) {
         SpringApplication.run(VoiceToTextLineBotApplication.class, args);
     }
 
     @EventMapping
-    public Message handleTextMessageEvent(MessageEvent<TextMessageContent> event) {
+    public Message handleTextMessageEvent(MessageEvent<TextMessageContent> textEevent) {
         return new TextMessage("テキスト送信ありがとうございます！");
     }
 
     @EventMapping
-    public Message handleImageMessageEvent(MessageEvent<ImageMessageContent> event) {
+    public Message handleImageMessageEvent(MessageEvent<ImageMessageContent> imageEvent) {
         return new TextMessage("動画送信ありがとうございます！");
     }
 
     @EventMapping
-    public Message handleAudioMessage(MessageEvent<AudioMessageContent> event) {
-        return new TextMessage("音声送信ありがとうございます！");
+    public List<Message> handleAudioMessage(MessageEvent<AudioMessageContent> audioEvent) throws Exception {
+        ConvertLogic convertLogic = new ConvertLogic();
+        List<String> message = convertLogic.convertVoiceToText(audioEvent);
+        List<Message> messages = new ArrayList<>();
+        for(String mess:  message){
+            messages.add(new TextMessage(mess));
+        }
+        return messages;
     }
 
     @EventMapping
