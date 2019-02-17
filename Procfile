@@ -1,1 +1,1 @@
-web: java -jar target/voice-to-text-line-bot.jar
+web java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/*.jar
