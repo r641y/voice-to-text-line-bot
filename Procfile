@@ -1,1 +1,1 @@
-web: java -jar target/voice-to-text-line-bot.jar --server.port=${PORT}
+web: java -jar target/voice-to-text-line-bot.jar
