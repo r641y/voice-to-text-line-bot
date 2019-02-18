@@ -44,39 +44,36 @@ public class ConvertLogic {
         System.out.println(audioEvent.getMessage().getContentProvider());
         List<String> ans = new ArrayList<>();
 
-        // 以下の処理で取得している
-        final LineMessagingClient client = LineMessagingClient
-                .builder(System.getenv("LINE_BOT_CHANNEL_TOKEN"))
-                .build();
-
-        final MessageContentResponse messageContentResponse;
-        Optional<String> opt = Optional.empty();
-
         try {
+            // 以下の処理で取得している
+            final LineMessagingClient client = LineMessagingClient
+                    .builder(System.getenv("LINE_BOT_CHANNEL_TOKEN"))
+                    .build();
+
+            final MessageContentResponse messageContentResponse;
+            Optional<String> opt = Optional.empty();
+
             messageContentResponse = client.getMessageContent(messageId).get();
             opt = makeM4aFile(messageContentResponse, ".m4a");
             System.out.println("file-path: " + opt.orElseGet(() -> "ファイル書き込みNG"));
-        } catch (Exception e) {
 
-        }
 
-        // m4aからflacに変換
-        // ここは外部コマンドを叩く
+            // m4aからflacに変換
+            // ここは外部コマンドを叩く
 
-        String aa = opt.get();
-        Optional<String> opt2 = Optional.of(aa.replace(".m4a", ".flac"));
+            String aa = opt.get();
+            Optional<String> opt2 = Optional.of(aa.replace(".m4a", ".flac"));
 
-        System.out.println(opt.get());
+            System.out.println(opt.get());
 
-        List<String> command = new ArrayList<>();
-        command.add("ffmpeg");
-        command.add("-i");
-        command.add(opt.get());
-        command.add("-sample_fmt");
-        command.add("s16");
-        command.add(opt2.get());
+            List<String> command = new ArrayList<>();
+            command.add("ffmpeg");
+            command.add("-i");
+            command.add(opt.get());
+            command.add("-sample_fmt");
+            command.add("s16");
+            command.add(opt2.get());
 
-        try {
             ProcessBuilder pb = new ProcessBuilder(command);
 
             Process process = pb.start();
@@ -85,14 +82,8 @@ public class ConvertLogic {
             System.out.println("結果：" + ret);
 
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-
-        // Instantiates a client
-        try (SpeechClient speechClient = SpeechClient.create()) {
+            // Instantiates a client
+            SpeechClient speechClient = SpeechClient.create();
 
             // The path to the audio file to transcribe
 //            String fileName = "src/main/resources/voice/sample1.flac";
@@ -127,7 +118,12 @@ public class ConvertLogic {
                 System.out.printf("Transcription: %s%n", alternative.getTranscript());
                 ans.add(alternative.getTranscript());
             }
+            return ans;
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
         }
-        return ans;
+
     }
 }
