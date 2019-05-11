@@ -4,7 +4,11 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'application'
 
+mainClassName = 'work.r641y.voicetotextlinebot'
 group = 'work.r641y'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -13,14 +17,18 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    baseName = 'voice-to-text-line-bot'
+    version = '0.1.0'
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compile group: 'com.linecorp.bot', name: 'line-bot-spring-boot', version: '2.4.0'
     compile group: 'com.google.cloud', name: 'google-cloud-speech', version: '0.80.0-beta'
-    // gcpの認証用のコード
     compile 'com.google.cloud:google-cloud-storage:1.49.0'
     // https://mvnrepository.com/artifact/net.bramp.ffmpeg/ffmpeg
     compile group: 'net.bramp.ffmpeg', name: 'ffmpeg', version: '0.6.2'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
