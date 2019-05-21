@@ -31,17 +31,11 @@ public class ConvertLogic {
      *
      * @param command
      */
-    private void execute(String command) {
+    private void execute(String command) throws InterruptedException, IOException {
         ProcessBuilder pb = new ProcessBuilder(toList(command));
-        try {
-            Process process = pb.start();
-            process.waitFor();
-            process.exitValue();
-        } catch (InterruptedException interruptException) {
-            throw new RuntimeException("コマンド失敗", interruptException);
-        } catch (IOException ioException) {
-            throw new RuntimeException("コマンド失敗", ioException);
-        }
+        Process process = pb.start();
+        process.waitFor();
+        process.exitValue();
     }
 
     /**
