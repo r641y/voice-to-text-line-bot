@@ -36,8 +36,7 @@ public class ConvertLogic {
         try {
             Process process = pb.start();
             process.waitFor();
-            int ret = process.exitValue();
-            if (ret == 0) throw new RuntimeException("変換が失敗しました。");
+            process.exitValue();
         } catch (InterruptedException interruptException) {
             throw new RuntimeException("コマンド失敗", interruptException);
         } catch (IOException ioException) {
@@ -95,7 +94,7 @@ public class ConvertLogic {
         Optional<String> afterConversionFile = Optional.of(beforeConversionFile.get().replace(M4A_FILE, FLAC_FILE));
 
         // command
-        String command = "ffmpeg -i " + beforeConversionFile.get() + " -sample_fmt s16 " + afterConversionFile.get();
+        String command = "ffmpeg -y -i " + beforeConversionFile.get() + " -sample_fmt s16 " + afterConversionFile.get();
 
         // execute command
         execute(command);

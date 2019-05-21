@@ -8,18 +8,13 @@ apply plugin: 'idea'
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'work.r641y.voicetotextlinebot'
+mainClassName = 'work.r641y.voicetotextlinebot.VoiceToTextLineBotApplication'
 group = 'work.r641y'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
-}
-
-jar {
-    baseName = 'voice-to-text-line-bot'
-    version = '0.1.0'
 }
 
 dependencies {

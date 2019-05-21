@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="work.r641y.voice-to-text-line-bot-app.main" target="1.8" />
+      <module name="work.r641y.voice-to-text-line-bot-app.test" target="1.8" />
       <module name="work.r641y.voice-to-text-line-bot.main" target="1.8" />
       <module name="work.r641y.voice-to-text-line-bot.test" target="1.8" />
     </bytecodeTargetLevel>
