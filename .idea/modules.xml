@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/work.r641y.voice-to-text-line-bot.iml" filepath="$PROJECT_DIR$/.idea/modules/work.r641y.voice-to-text-line-bot.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/work.r641y.voice-to-text-line-bot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/work.r641y.voice-to-text-line-bot.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/work.r641y.voice-to-text-line-bot.test.iml" filepath="$PROJECT_DIR$/.idea/modules/work.r641y.voice-to-text-line-bot.test.iml" />
     </modules>
   </component>
 </project>
